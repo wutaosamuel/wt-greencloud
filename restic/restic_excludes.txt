@@ -1,0 +1,3 @@
+/root/tmp
+/root/data/btDownload/complete/*
+/root/data/btDownload/incomplete/*
