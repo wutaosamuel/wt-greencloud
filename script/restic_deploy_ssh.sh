@@ -1,10 +1,6 @@
 #!/bin/bash
 
 scriptDir="$(dirname $0)"
-configFile="$(dirname $scriptDir)"/vault/machine.txt
-
-source $configFile
-export IPV4_ADDR=$IPV4_ADDR
 
 resticShSource="$(dirname $scriptDir)"/restic/restic.sh
 resticInSource="$(dirname $scriptDir)"/restic/restic_includes.txt
@@ -23,7 +19,17 @@ resticInContent="$(cat $resticInSource)"
 resticExContent="$(cat $resticExSource)"
 resticEnvContent="$(cat $resticEnvSource)"
 
-echo "$resticShContent" > "$resticShDestination"
-echo "$resticInContent" > "$resticInDestination"
-echo "$resticExContent" > "$resticExDestination"
-echo "$resticEnvContent" > "$resticEnvDestination"
+# TODO: check target directory exist
+sshCMD="$(cat << sshCMDEnd
+echo "$resticShContent" > "$resticShDestination";
+echo "$resticInContent" > "$resticInDestination";
+echo "$resticExContent" > "$resticExDestination";
+echo "$resticEnvContent" > "$resticEnvDestination";
+sshCMDEnd
+)"
+
+configFile="$(dirname $scriptDir)"/vault/machine.txt
+source $configFile
+
+ssh "$SSH_USER"@"$IPV4_ADDR" "$sshCMD"
+echo done
