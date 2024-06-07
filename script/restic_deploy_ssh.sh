@@ -11,8 +11,8 @@ resticInSource="$(dirname $scriptDir)"/restic/restic_includes.txt
 resticExSource="$(dirname $scriptDir)"/restic/restic_excludes.txt
 resticEnvSource="$(dirname $scriptDir)"/vault/restic_env.txt
 
-#targetLocation="/root/restic"
-targetLocation="."
+#targetLocation="."
+targetLocation="/root/restic"
 resticShDestination="$targetLocation"/restic.sh
 resticInDestination="$targetLocation"/restic_includes.txt
 resticExDestination="$targetLocation"/restic_excludes.txt
