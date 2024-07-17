@@ -7,7 +7,7 @@
 
 # restic
 resticDir="$(dirname $0)"
-envFile="$resticDir"/restic_env.txt
+envFile="$resticDir"/restic.env
 
 source $envFile
 export B2_ACCOUNT_ID=$B2_ACCOUNT_ID
