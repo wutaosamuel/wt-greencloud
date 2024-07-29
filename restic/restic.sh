@@ -8,31 +8,14 @@ resticDir="$(dirname $0)"
 envEnc="$resticDir"/restic_env.enc
 
 # b2 account info
-accountID=
-accountKEY=
-passphrase=""
-#read -s -p "Enter passphrase for b2 account: " passphrase
-#echo ""
-#envString="$(gpg --passphrase $passphrase --decrypt $envEnc)"
-envString="$(gpg --decrypt $envEnc)"
-echo "$envString"
-source <(echo "$envString")
-accountID="$B2_ACCOUNT_ID"
-accountKEY="$B2_ACCOUNT_KEY"
-if [ -z "$accountID" ]; then
-	echo "B2 account ID is empty"
-	exit 1
-fi
-if [ -z "$accountKEY" ]; then
-	echo "B2 account KEY is empty"
-	exit 1
-fi
-echo "B2_ACCOUNT_ID=$accountID"
-echo "B2_ACCOUNT_KEY=$accountKEY"
-
+gpg -o "$resticDir"/restic.env --decrypt "$envEnc"
+source "$resticDir"/restic.env
 # export b2 environment
-export B2_ACCOUNT_ID="$accountID"
-export B2_ACCOUNT_KEY="$accountKEY"
+export B2_ACCOUNT_ID="$B2_ACCOUNT_ID"
+export B2_ACCOUNT_KEY="$B2_ACCOUNT_KEY"
 
 # restic
 restic -r b2:greencloud:restic_backup --verbose backup --files-from "$resticDir"/restic_includes.txt --exclude-file "$resticDir"/restic_excludes.txt
+
+# clean
+rm "$resticDir"/restic.env
