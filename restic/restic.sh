@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO: excludes.txt remove /root/syncthing/config/mySync/U.syncthing-enc/
+
 # restic_test
 #restic -r /root/tmp/restic_test --verbose backup --files-from /root/restic/restic_includes.txt --exclude-file /root/restic/restic_excludes.txt
 

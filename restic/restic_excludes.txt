@@ -1,3 +1,4 @@
 /root/tmp
+/root/data/btDownload/share/*
 /root/data/btDownload/complete/*
 /root/data/btDownload/incomplete/*
