@@ -1,4 +1,5 @@
 /root/tmp
+/root/data/syncthing/mySync
 /root/data/btDownload/share/*
 /root/data/btDownload/complete/*
 /root/data/btDownload/incomplete/*
